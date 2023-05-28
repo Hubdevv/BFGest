@@ -52,6 +52,7 @@ form input {
     border-radius: 10px;
     background-color: transparent;
     border: 1px solid #444951;
+    color: var(--cl2);
 }
 
 form input[type=submit] {
