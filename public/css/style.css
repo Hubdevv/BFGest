@@ -1,4 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@font-face {
+    font-family: 'icons';
+    src: url('icons.ttf') format('truetype');
+}
+
+.icon {
+    font-family: 'icons' !important;
+    line-height: 1.5;
+    vertical-align: middle
+}
+
 body {
     font-family: 'Lato', sans-serif;
     background-color: var(--cl1);
@@ -14,8 +25,18 @@ body {
     height: 100vh;
 }
 
+.ai-center {
+    display: flex;
+    align-items: center;
+}
+
 .flex {
     display: flex;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .d-block {
@@ -83,4 +104,89 @@ form {
 .btn:hover {
     color: var(--cl4);
     background-color: #fff;
+}
+
+
+/* dashboard */
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 20%;
+    background-color: var(--cl4);
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: var(--cl3);
+    height: 70px;
+}
+
+header img {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+aside .top {
+    padding: 20px;
+    background-color: var(--cl1);
+}
+
+aside .top p {
+    color: var(--cl2);
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+aside {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    background-color: var(--cl3);
+    width: 15%;
+}
+
+aside ul {
+    padding-top: 50px;
+    list-style: none;
+    padding: 20px;
+}
+
+aside ul li {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+aside ul li .link {
+    color: var(--cl2);
+}
+
+aside ul li .link:hover {
+    color: #fff;
+}
+
+aside ul li:hover {
+    background-color: var(--cl4);
+}
+
+aside ul li .icon {
+    margin-right: 5px;
+}
+
+.link {
+    text-decoration: none;
 }
