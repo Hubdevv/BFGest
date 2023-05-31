@@ -5,6 +5,8 @@
     --cl2: #a6adba;
     --cl3: #2a303c;
     --cl4: #641ae6;
+    --cl5: #20b2a5;
+    --cl6: #f87272;
 }
 
 .cl1 {
@@ -21,4 +23,16 @@
 
 .cl4 {
     color: var(--cl4);
+}
+
+.cl5 {
+    color: var(--cl5);
+}
+
+.cl6 {
+    color: var(--cl6);
+}
+
+.col-10 {
+    width: 100%;
 }

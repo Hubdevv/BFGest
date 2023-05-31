@@ -127,7 +127,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: end;
-    background-color: var(--cl3);
+    background-color: var(--cl1);
     height: 70px;
 }
 
@@ -138,9 +138,47 @@ header img {
     border-radius: 50%;
 }
 
+header .name {
+    position: relative;
+}
+
+header .name p {
+    font-size: 1.3em;
+}
+
+header .name .green {
+    color: var(--cl5);
+    font-size: 1em;
+    position: absolute;
+    bottom: 0px;
+    right: -5px;
+}
+
+header .icon,
+header .name {
+    margin-right: 20px;
+}
+
+header .icon {
+    font-size: 1.3em;
+}
+
+.circle {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: var(--cl4);
+    top: 0;
+    right: 12px;
+}
+
 aside .top {
     padding: 20px;
-    background-color: var(--cl1);
+    background-color: var(--cl3);
+    position: absolute;
+    top: 0;
+    width: 195px;
 }
 
 aside .top p {
@@ -150,11 +188,8 @@ aside .top p {
 }
 
 aside {
-    position: absolute;
-    top: 0;
     height: 100vh;
-    background-color: var(--cl3);
-    width: 15%;
+    background-color: var(--cl1);
 }
 
 aside ul {
@@ -163,28 +198,53 @@ aside ul {
     padding: 20px;
 }
 
-aside ul li {
+aside ul li .link {
     align-items: center;
     justify-content: start;
     display: flex;
     padding: 10px;
     border-radius: 8px;
-}
-
-aside ul li .link {
     color: var(--cl2);
 }
 
-aside ul li .link:hover {
-    color: #fff;
-}
-
-aside ul li:hover {
+aside ul li:hover .link {
     background-color: var(--cl4);
+    color: #fff;
 }
 
 aside ul li .icon {
     margin-right: 5px;
+}
+
+.main {
+    background-color: var(--cl3);
+}
+
+.card {
+    margin-top: 25px;
+    margin-left: 25px;
+    color: var(--cl2);
+    padding: 30px;
+    background-color: var(--cl1);
+    width: 600px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.card .logo .icon {
+    font-size: 2em;
+    color: #fff;
+}
+
+.card .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 234px 100%;
 }
 
 .link {
