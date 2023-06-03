@@ -1,26 +1,13 @@
-import React from 'react'
-import { useContext , useEffect , useState } from 'react'
-import { Link , useNavigate } from 'react-router-dom'
+import React , {useContext} from 'react'
+import { useNavigate, Link } from "react-router-dom";
 import { Context } from '../class/Context'
-import Logout from '../class/Logout'
+import Logout from '../class/Logout';
 
-function Dashboard() {
+
+function Users() {
   const context = useContext(Context)
-  const [data, setData] = useState('');
-  // const [userAllInfos, setUserAllInfos] = useState('');
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch(`https://bf-gest.rylize.dev/users/62fd25c1c143830a30c75dda`)
-    .then(response => response.json())
-    .then(data => {
-      setData(data[0])
-      console.log(data.lastName)
-      console.log('Minouche');
-
-    } );
-  }, []);
-
   return (
     <div className='col-10' >
 
@@ -32,14 +19,13 @@ function Dashboard() {
                 <div className="circle"></div>
             </div>
            <div className='name user'>
-              {/* <p className='cl2 '>{localStorage.getItem(data.lastName)}</p> */}
-              <p className='cl2 '>Lyes</p>
-              <span className='green'>SuperAdmin</span>
-
+                <p className='cl2 '>Lyes</p>
+                <span className='green'>SuperAdmin</span>
+                
                 <ul className='compte'>
                       <li><Link to={'/'} className='link'>Profile</Link></li>
                       <li><Link to={'/'} className='link'>Parametres</Link></li>
-                      <li><Link onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li>
+                      <li><Link  onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li>
 
                 </ul>
             </div>
@@ -55,7 +41,7 @@ function Dashboard() {
                     <p>BFGest</p>
                 </div>
                 <ul>
-                    <li><Link to={"/"} className='link' > <span className='icon'>a</span> Tableau de bord</Link> </li>
+                    <li><Link to={"/dashboard"} className='link' > <span className='icon'>a</span> Tableau de bord</Link> </li>
                     <li><Link to={"/"} className='link' ><span className='icon'>u</span> Clients </Link></li>
                     <li><Link to={"/"} className='link' ><span className='icon'>h</span> Achats</Link></li>
                     <li><Link to={"/"} className='link' ><span className='icon'>s</span> Articles</Link></li>
@@ -65,12 +51,41 @@ function Dashboard() {
                 </ul>
         </aside>
         <div className="main">
-          <div className="card">
-            <div className="logo"><span className="icon">a</span></div>
-            <h1>Bienvenue <strong>Lyes Djerada</strong></h1>
+          <h1 className='cl2'>Utilisateurs</h1>
+          <div className=" bloc">
+            <form  action='' method='POST' className="form "> 
+              <input type="search"  placeholder='Recherche'/>
+            </form>
+            <div className="left">
+              <Link to={"/"} className="btn link sup">SUPPRIMER</Link>
+              <Link to={"/"} className="btn link add">AJOUTER</Link>
+            </div>
 
-            <p>Votre business vous attend</p>
           </div>
+
+          <table>
+            <tr>
+              <th> <form action="" className='form'>
+                 <input type="checkbox" name="check" id="" /></form></th>
+              <th>NOM</th>
+              <th>PRENOM</th>
+              <th>EMAIL</th>
+              <th>ROLE</th>
+            </tr>
+
+            <tr>
+            <td>
+            <form action="" className='form'>
+                 <input type="checkbox" name="check" id="" /></form>
+              </td>
+              <td>hello</td>
+              <td>hello</td>
+              <td>hello</td>
+              <td>hello</td>
+            </tr>
+          </table>
+        
+
         </div>
       </div>
  
@@ -78,4 +93,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Users

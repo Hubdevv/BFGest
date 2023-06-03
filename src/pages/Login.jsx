@@ -1,31 +1,55 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import User from '../class/User'
+import { useNavigate } from 'react-router-dom'
+import { Context } from '../class/Context'
 
-const Connect = async (e, setError) => {
+const Connect = async (e, setError,navigate,setSession) => {
 
-    e.preventDefault()
-    let inputs = e.target
-    let pass = inputs.pass 
-    let email = inputs.email  
+  e.preventDefault()
 
- if( email.value !=='' && pass.value !==''){
+  let inputs = e.target
 
-    console.log("Les champs sont remplis")
-    // console.log(email.value);
-    // console.log('hello ')
+  let pass= inputs.pass
 
-    // const results = await User.login(inputs);
+  let email = inputs.email
 
-    // console.log(results)
-    if(pass.value ==''){setError(true)
-    console.log('hello ')}
+  if( email.value !=='' && pass.value !==''){
 
-}
+      console.log("Les champs sont remplis")
+
+      const results = await User.login(inputs);
+
+      console.log(results)
+
+      if(results.success){
+        
+        localStorage.setItem('id', results.user.id)   
+        localStorage.setItem('email', results.user.email);    
+        localStorage.setItem('token', results.tokens.access.token);    
+        localStorage.setItem('firstName', results.user.firstName);    
+        localStorage.setItem('lastName', results.user.lastName);    
+          setError('')
+          navigate('/dashboard')
+          setSession(true)
+
+       }else{
+          setError(results.message)
+                       
+       }
+
+  }else{
+
+  setError( 'Veuillez saisir votre mot de passe')
+  }
+
 }
 
 function Login() {
 
-  const [error, setError] =useState(false)
+  const navigate = useNavigate();
+  const context = useContext(Context)
+
+  const [error, setError] = useState('')
 
   return (
     <div className='c center'>
@@ -33,13 +57,18 @@ function Login() {
         <h2>Connectez vous</h2>
         <p>Connectez-vous à votre espace administrateur</p>
 
-        <form action='' method='POST' onSubmit={(e) => Connect(e, setError)}>
-            {error? <p className='cl6'>Veuillez saisir votre mot de passe.</p> : ''}
+        <form action="" method="POST" onSubmit={(e) => Connect(e,setError,navigate, context.setSession)}>
+
+          {(error !== '') && <p className="err">{error}</p>}  
+
             <label>Email</label>
-            <input type="email" name='email' placeholder='Email' required="true" />
+            <input type="email" name='email' id='email' placeholder='Email' required="true" />
 
             <label>Mot de passe</label>
-            <input type="password" name='pass' placeholder='Mot de passe' required="true"/>
+            <input type="password" id='pass' placeholder='Mot de passe'/>
+           {/* {(error !== '') && <p className="cl6">Veuillez saisir votre mot de passe</p>}   */}
+
+
             <input type="submit" value={"SE CONNECTER"}  className="btn" />
             
         </form>

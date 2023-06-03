@@ -60,23 +60,41 @@ body {
     border-radius: 15px;
 }
 
+form label {
+    display: block;
+}
+
 form input:focus {
     outline: none;
     color: var(--cl2);
     font-size: 15px;
 }
 
+.form input[type="search"] {
+    width: 100%;
+}
+
+.form input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    color: #fff;
+    background-color: var(--cl4);
+    border: 1px solid #444951;
+}
+
 form input {
     border: none;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     padding: 15px 20px;
     border-radius: 10px;
     background-color: transparent;
     border: 1px solid #444951;
     color: var(--cl2);
+    width: 80%;
 }
 
 form input[type=submit] {
+    display: block;
     border: none;
     margin-bottom: 20px;
 }
@@ -87,10 +105,6 @@ form input::placeholder {
 
 form label {
     margin-bottom: 10px;
-}
-
-form {
-    display: grid;
 }
 
 .btn {
@@ -220,6 +234,41 @@ aside ul li .icon {
     background-color: var(--cl3);
 }
 
+.bloc {
+    display: flex;
+    align-items: center;
+}
+
+.bloc .form {
+    width: 35%;
+}
+
+.bloc .form input {
+    margin: 0;
+}
+
+.bloc .left {
+    width: 65%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.bloc .left .sup {
+    background-color: var(--cl6);
+    margin-right: 20px;
+}
+
+.bloc .left .btn {
+    font-size: 0.8em;
+    padding: 13px;
+}
+
+.bloc .left .sup:hover {
+    background-color: var(--cl1);
+    color: #fff;
+}
+
 .card {
     margin-top: 25px;
     margin-left: 25px;
@@ -244,9 +293,78 @@ aside ul li .icon {
 
 .grid2 {
     display: grid;
-    grid-template-columns: 234px 100%;
+    grid-template-columns: 234px calc(100% - 234px);
+}
+
+.main {
+    padding: 20px;
+}
+
+ul {
+    list-style: none;
 }
 
 .link {
     text-decoration: none;
+}
+
+table {
+    margin-top: 30PX;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table tr {
+    background-color: var(--cl1);
+}
+
+table tr td,
+table tr th {
+    color: var(--cl2);
+}
+
+table tr th {
+    font-size: 0.8em;
+    text-align: left;
+}
+
+table tr td {
+    background-color: var(--cl3);
+}
+
+.compte {
+    padding: 20px;
+    position: absolute;
+    top: 50px;
+    right: -10px;
+    width: 110px;
+    background-color: var(--cl1);
+    border-radius: 8px;
+    padding-top: 5px;
+    display: none;
+}
+
+.compte .link {
+    color: var(--cl2);
+    font-size: 15px;
+}
+
+.compte li {
+    margin-bottom: 10px;
+}
+
+.compte .link:hover {
+    color: var(--cl4);
+}
+
+.user:hover .compte {
+    display: block;
+}
+
+.err {
+    background-color: var(--cl6);
+    color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    width: 85%;
 }
