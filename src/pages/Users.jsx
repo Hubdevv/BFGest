@@ -1,4 +1,4 @@
-import React , {useContext} from 'react'
+import React , {useContext , useEffect, useState} from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from '../class/Context'
 import Logout from '../class/Logout';
@@ -6,8 +6,14 @@ import Logout from '../class/Logout';
 
 function Users() {
   const context = useContext(Context)
-
+  const [user, setUser] = useState('');
   const navigate = useNavigate();
+
+//   useEffect(() => {
+// fetch ("https://bf-gest.rylize.dev/users?search=admin&role=admin")
+// .then((response) => response.json())
+// .then((data) => console.log(data))
+//   }, []);
   return (
     <div className='col-10' >
 

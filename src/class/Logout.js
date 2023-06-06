@@ -16,7 +16,7 @@ class Logout {
         localStorage.removeItem('token');
         localStorage.removeItem('firstName');
         localStorage.removeItem('lastName');
-        console.log('navigate');
+        console.log('logout');
         navigate('/');
 
     }

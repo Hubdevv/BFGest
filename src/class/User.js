@@ -1,8 +1,11 @@
+import { Navigate } from "react-router-dom"
+
 // import { API_ROOT } from "../Infos"
 class User {
     static login = (input) => {
         console.log(input.email.value)
         console.log(input.pass.value)
+
         let data = fetch("https://bf-gest.rylize.dev/auth/login", {
             method: "POST",
             headers: {
@@ -17,6 +20,10 @@ class User {
             return response.json()
         }).then(function(data) {
 
+            localStorage.setItem('access', data.tokens.access.token)
+            localStorage.setItem('refresh', data.tokens.refresh.token)
+            console.log(localStorage);
+
             return data
 
         })
@@ -30,14 +37,18 @@ class User {
         let data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+
+                Authorization: 'Bearer' + localStorage.getItem('token'),
             },
             body: JSON.stringify({
 
                 id: localStorage.getItem('id'),
-                token: localStorage.getItem('token')
+                token: localStorage.getItem('token'),
+                refreshToken: localStorage.getItem('refreshToken')
             })
         }).then(function(response) {
+            // if (response.status === 401) { Navigate('/') }
             return response.json()
         }).then(function(data) {
             console.log(data)
@@ -49,7 +60,7 @@ class User {
         return data
     }
 
-    static connected = async(setSession, setMe) => {
+    static connected = async(setSession) => {
 
         if (localStorage.getItem('id') !== undefined && localStorage.getItem('token') !== undefined) {
 
@@ -63,12 +74,12 @@ class User {
                 localStorage.removeItem('lastName')
                 localStorage.removeItem('email')
 
-
                 setSession(false)
 
             } else {
+
                 setSession(true)
-                setMe(results.user)
+
             }
 
             return results.success
@@ -80,32 +91,37 @@ class User {
     }
 
 
-    // static getAllUserInfos = async(setUserAllInfos, user = false) => {
 
-    //     if (!user) user = localStorage.getItem('id')
+    static getAllUserInfos = async(setUserAllInfos, user = false) => {
 
-    //     fetch("https://bf-gest.rylize.dev/users?search=admin&role=admin", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
+        if (!user) user = localStorage.getItem('id')
 
-    //             id: localStorage.getItem('id'),
-    //             token: localStorage.getItem('token'),
+        fetch("https://bf-gest.rylize.dev/users?search=admin&role=admin", {
+            method: "POST",
+            headers: {
 
-    //         })
-    //     }).then(function(response) {
-    //         return response.json()
-    //     }).then(function(data) {
+                "Content-Type": "application/json",
+                Authorization: 'Bearer' + localStorage.getItem('access'),
+            },
+            body: JSON.stringify({
 
-    //         if (data.success) {
-    //             setUserAllInfos(data.data)
-    //         }
+                id: localStorage.getItem('id'),
+                token: localStorage.getItem('token'),
 
-    //     })
 
-    // }
+            })
+        }).then(function(response) {
+            return response.json()
+        }).then(function(data) {
+            localStorage.setItem('token', data)
+            console.log(localStorage);
+            if (data.success) {
+                setUserAllInfos(data.data)
+            }
+
+        })
+
+    }
 
 
 }

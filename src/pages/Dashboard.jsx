@@ -6,20 +6,20 @@ import Logout from '../class/Logout'
 
 function Dashboard() {
   const context = useContext(Context)
-  const [data, setData] = useState('');
+  const [user, setUser] = useState('');
   // const [userAllInfos, setUserAllInfos] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(`https://bf-gest.rylize.dev/users/62fd25c1c143830a30c75dda`)
-    .then(response => response.json())
-    .then(data => {
-      setData(data[0])
-      console.log(data.lastName)
-      console.log('Minouche');
+  // useEffect(() => {
+  //   fetch(`https://bf-gest.rylize.dev/users/62fd25c1c143830a30c75dda`)
+  //   .then(response => response.json())
+  //   .then(user => {
+  //     setUser(user[0])
+  //     console.log(user.lastName)
+  //     console.log('Minouche');
 
-    } );
-  }, []);
+  //   } );
+  // }, []);
 
   return (
     <div className='col-10' >
@@ -32,7 +32,7 @@ function Dashboard() {
                 <div className="circle"></div>
             </div>
            <div className='name user'>
-              {/* <p className='cl2 '>{localStorage.getItem(data.lastName)}</p> */}
+              {/* <p className='cl2 '>{localStorage.getItem(user.user.lastName)}</p> */}
               <p className='cl2 '>Lyes</p>
               <span className='green'>SuperAdmin</span>
 
@@ -55,7 +55,7 @@ function Dashboard() {
                     <p>BFGest</p>
                 </div>
                 <ul>
-                    <li><Link to={"/"} className='link' > <span className='icon'>a</span> Tableau de bord</Link> </li>
+                    <li><Link to={"/dashboard"} className='link' > <span className='icon'>a</span> Tableau de bord</Link> </li>
                     <li><Link to={"/"} className='link' ><span className='icon'>u</span> Clients </Link></li>
                     <li><Link to={"/"} className='link' ><span className='icon'>h</span> Achats</Link></li>
                     <li><Link to={"/"} className='link' ><span className='icon'>s</span> Articles</Link></li>

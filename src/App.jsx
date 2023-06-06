@@ -8,16 +8,17 @@ import Users from './pages/Users';
 import User from './class/User';
 
 function App() {
+  
   const [session, setSession] = useState(false)
-  const [me, setMe] = useState(false)
+  // const [me, setMe] = useState(false)
 
   useEffect(() => {
-    User.connected(setSession, setMe)
+    User.connected(setSession)
   }, []);
-
+  
   return (
     <div className="App">
-    <Context.Provider value={{session: session, setSession: setSession ,  me:me, setMe: setMe}}>
+    <Context.Provider value={{session: session, setSession: setSession }}>
 
       <Router>
         <Routes>

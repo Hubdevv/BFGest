@@ -3,9 +3,9 @@ import User from '../class/User'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../class/Context'
 
-const Connect = async (e, setError,navigate,setSession) => {
+const Connect = async (e, setError,navigate) => {
 
-  e.preventDefault()
+  e.preventDefault();
 
   let inputs = e.target
 
@@ -21,16 +21,19 @@ const Connect = async (e, setError,navigate,setSession) => {
 
       console.log(results)
 
-      if(results.success){
-        
+      if(results){
+        console.log('logged in');
         localStorage.setItem('id', results.user.id)   
         localStorage.setItem('email', results.user.email);    
-        localStorage.setItem('token', results.tokens.access.token);    
+        localStorage.setItem('token', results.tokens.refresh.token);    
         localStorage.setItem('firstName', results.user.firstName);    
-        localStorage.setItem('lastName', results.user.lastName);    
+        localStorage.setItem('lastName', results.user.lastName); 
+
           setError('')
+
           navigate('/dashboard')
-          setSession(true)
+
+          // setSession(true)
 
        }else{
           setError(results.message)
@@ -57,7 +60,7 @@ function Login() {
         <h2>Connectez vous</h2>
         <p>Connectez-vous à votre espace administrateur</p>
 
-        <form action="" method="POST" onSubmit={(e) => Connect(e,setError,navigate, context.setSession)}>
+        <form action="" method="POST" onSubmit={(e) => Connect(e,setError,navigate)}>
 
           {(error !== '') && <p className="err">{error}</p>}  
 
