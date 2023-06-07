@@ -1,4 +1,5 @@
 class Logout {
+
     static session(context, navigate) {
 
         if ((context.session !== true)) navigate('/')

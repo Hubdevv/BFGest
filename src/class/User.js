@@ -33,31 +33,55 @@ class User {
 
 
 
+    // static session = () => {
+    //     let data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+
+    //             Authorization: 'Bearer' + localStorage.getItem('token') + localStorage.getItem('refreshToken'),
+    //         },
+    //         body: JSON.stringify({
+
+    //             id: localStorage.getItem('id'),
+    //             token: localStorage.getItem('token'),
+    //             refreshToken: localStorage.getItem('refreshToken')
+    //         })
+    //     }).then(function(response) {
+    //         // if (response.status === 401) { Navigate('/') }
+    //         return response.json()
+    //     }).then(function(data) {
+    //         console.log(data.toString)
+
+    //         return data
+
+    //     })
+
+    //     return data
+    // }
+
     static session = () => {
-        let data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-
-                Authorization: 'Bearer' + localStorage.getItem('token'),
-            },
-            body: JSON.stringify({
-
-                id: localStorage.getItem('id'),
-                token: localStorage.getItem('token'),
-                refreshToken: localStorage.getItem('refreshToken')
+        const data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: 'Bearer ' + localStorage.getItem('token') + ' ' + localStorage.getItem('refresh'),
+                },
+                body: JSON.stringify({
+                    refreshToken: localStorage.getItem('refresh')
+                })
             })
-        }).then(function(response) {
-            // if (response.status === 401) { Navigate('/') }
-            return response.json()
-        }).then(function(data) {
-            console.log(data)
+            .then(function(response) {
 
-            return data
+                return response.json();
+            })
+            .then(function(data) {
 
-        })
+                console.log(data);
+                return data;
+            });
 
-        return data
+        return data;
     }
 
     static connected = async(setSession) => {
@@ -66,7 +90,7 @@ class User {
 
             const results = await this.session()
 
-            if (!results.success) {
+            if (!results) {
 
                 localStorage.removeItem('id')
                 localStorage.removeItem('token')
