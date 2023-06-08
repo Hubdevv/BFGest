@@ -9,11 +9,14 @@ function Users() {
   const [user, setUser] = useState('');
   const navigate = useNavigate();
 
-//   useEffect(() => {
-// fetch ("https://bf-gest.rylize.dev/users?search=admin&role=admin")
-// .then((response) => response.json())
-// .then((data) => console.log(data))
-//   }, []);
+  useEffect(() => {
+
+
+fetch ("https://bf-gest.rylize.dev/users?search=admin&role=admin")
+.then((response) => response.json())
+.then((data) =>{ setUser(data)
+   console.log(data)})
+  }, []);
   return (
     <div className='col-10' >
 
@@ -25,8 +28,8 @@ function Users() {
                 <div className="circle"></div>
             </div>
            <div className='name user'>
-                <p className='cl2 '>Lyes</p>
-                <span className='green'>SuperAdmin</span>
+                <p className='cl2 '>{localStorage.getItem('firstName')}</p>
+                <span className='green'>{localStorage.getItem('role')}</span>
                 
                 <ul className='compte'>
                       <li><Link to={'/'} className='link'>Profile</Link></li>
@@ -84,10 +87,15 @@ function Users() {
             <form action="" className='form'>
                  <input type="checkbox" name="check" id="" /></form>
               </td>
+
+              {/* <td>{
+              user.map((element)=> {
+                return <p>{element.firstName}</p>
+              })}</td> */}
               <td>hello</td>
               <td>hello</td>
               <td>hello</td>
-              <td>hello</td>
+
             </tr>
           </table>
         

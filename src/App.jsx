@@ -10,7 +10,6 @@ import User from './class/User';
 function App() {
   
   const [session, setSession] = useState(false)
-  // const [me, setMe] = useState(false)
 
   useEffect(() => {
     User.connected(setSession)

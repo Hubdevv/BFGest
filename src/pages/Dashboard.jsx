@@ -32,9 +32,9 @@ function Dashboard() {
                 <div className="circle"></div>
             </div>
            <div className='name user'>
-              {/* <p className='cl2 '>{localStorage.getItem(user.user.lastName)}</p> */}
-              <p className='cl2 '>Lyes</p>
-              <span className='green'>SuperAdmin</span>
+              <p className='cl2 '>{localStorage.getItem('firstName')}</p>
+         
+              <span className='green'>{localStorage.getItem('role')}</span>
 
                 <ul className='compte'>
                       <li><Link to={'/'} className='link'>Profile</Link></li>
@@ -67,8 +67,8 @@ function Dashboard() {
         <div className="main">
           <div className="card">
             <div className="logo"><span className="icon">a</span></div>
-            <h1>Bienvenue <strong>Lyes Djerada</strong></h1>
-
+            <h1>Bienvenue <strong>{localStorage.getItem('firstName')}</strong> <strong> {localStorage.getItem('lastName')}</strong></h1>
+            <p className='cl4'>{localStorage.getItem('role')}</p>
             <p>Votre business vous attend</p>
           </div>
         </div>

@@ -32,34 +32,6 @@ class User {
     }
 
 
-
-    // static session = () => {
-    //     let data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-
-    //             Authorization: 'Bearer' + localStorage.getItem('token') + localStorage.getItem('refreshToken'),
-    //         },
-    //         body: JSON.stringify({
-
-    //             id: localStorage.getItem('id'),
-    //             token: localStorage.getItem('token'),
-    //             refreshToken: localStorage.getItem('refreshToken')
-    //         })
-    //     }).then(function(response) {
-    //         // if (response.status === 401) { Navigate('/') }
-    //         return response.json()
-    //     }).then(function(data) {
-    //         console.log(data.toString)
-
-    //         return data
-
-    //     })
-
-    //     return data
-    // }
-
     static session = () => {
         const data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
                 method: "POST",
@@ -83,6 +55,8 @@ class User {
 
         return data;
     }
+
+
 
     static connected = async(setSession) => {
 
