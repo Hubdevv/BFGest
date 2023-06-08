@@ -1,6 +1,3 @@
-import { Navigate } from "react-router-dom"
-
-// import { API_ROOT } from "../Infos"
 class User {
     static login = (input) => {
         console.log(input.email.value)
@@ -89,7 +86,6 @@ class User {
     }
 
 
-
     static getAllUserInfos = async(setUserAllInfos, user = false) => {
 
         if (!user) user = localStorage.getItem('id')
@@ -102,10 +98,6 @@ class User {
                 Authorization: 'Bearer' + localStorage.getItem('access'),
             },
             body: JSON.stringify({
-
-                id: localStorage.getItem('id'),
-                token: localStorage.getItem('token'),
-
 
             })
         }).then(function(response) {

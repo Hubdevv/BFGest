@@ -2,21 +2,36 @@ import React , {useContext , useEffect, useState} from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from '../class/Context'
 import Logout from '../class/Logout';
+import User from '../class/User';
+import Table from '../components/Table';
 
+const getUsers = async(setAllUser) =>{
+
+  const results = await User.getAllUserInfos();
+
+  console.log("where are the users !")
+
+  setAllUser(results)
+
+  console.log(results)
+}
 
 function Users() {
+
   const context = useContext(Context)
-  const [user, setUser] = useState('');
+
+  const [alluser, setAllUser] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    
+    User.session(context, navigate)
 
+    getUsers(setAllUser)
 
-fetch ("https://bf-gest.rylize.dev/users?search=admin&role=admin")
-.then((response) => response.json())
-.then((data) =>{ setUser(data)
-   console.log(data)})
   }, []);
+  
   return (
     <div className='col-10' >
 
@@ -82,21 +97,13 @@ fetch ("https://bf-gest.rylize.dev/users?search=admin&role=admin")
               <th>ROLE</th>
             </tr>
 
-            <tr>
-            <td>
-            <form action="" className='form'>
-                 <input type="checkbox" name="check" id="" /></form>
-              </td>
-
-              {/* <td>{
-              user.map((element)=> {
-                return <p>{element.firstName}</p>
-              })}</td> */}
-              <td>hello</td>
-              <td>hello</td>
-              <td>hello</td>
-
-            </tr>
+       
+            {
+                alluser
+                &&
+              
+                alluser.map((element) => <Table key={element.id} user={element} />)
+            }
           </table>
         
 

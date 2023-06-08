@@ -1,25 +1,14 @@
 import React from 'react'
-import { useContext , useEffect , useState } from 'react'
+import { useContext } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { Context } from '../class/Context'
 import Logout from '../class/Logout'
 
 function Dashboard() {
+  
   const context = useContext(Context)
-  const [user, setUser] = useState('');
-  const [userAllInfos, setUserAllInfos] = useState('');
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch(`https://bf-gest.rylize.dev/users/62fd25c1c143830a30c75dda`)
-    .then(response => response.json())
-    .then(user => {
-      setUser(user[0])
-      console.log(user.lastName)
-      console.log('Minouche');
-
-    } );
-  }, []);
 
   return (
     <div className='col-10' >
