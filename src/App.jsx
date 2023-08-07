@@ -12,7 +12,7 @@ function App() {
   const [session, setSession] = useState(false)
 
   useEffect(() => {
-    User.connected(setSession)
+    // User.connected(setSession)
   }, []);
   
   return (
@@ -21,9 +21,8 @@ function App() {
 
       <Router>
         <Routes>
-          <Route></Route>
 
-          <Route path="/" element={<Login />}></Route>
+           <Route path="/" element={<Login />}></Route>
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/user' element={<Users/>}></Route>
 

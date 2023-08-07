@@ -10,6 +10,7 @@ class User {
             },
             body: JSON.stringify({
 
+                Authorization: 'Bearer' + localStorage.getItem('access'),
                 email: input.email.value,
                 password: input.pass.value,
             })
@@ -17,9 +18,9 @@ class User {
             return response.json()
         }).then(function(data) {
 
-            localStorage.setItem('access', data.tokens.access.token)
-            localStorage.setItem('refresh', data.tokens.refresh.token)
-            console.log(localStorage);
+            // localStorage.setItem('access', data.tokens.access.token)
+            // localStorage.setItem('refresh', data.tokens.refresh.token)
+
 
             return data
 
@@ -28,88 +29,128 @@ class User {
         return data
     }
 
+    // static session(context, navigate) {
 
-    static session = () => {
-        const data = fetch("https://bf-gest.rylize.dev/auth/refresh-tokens", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: 'Bearer ' + localStorage.getItem('token') + ' ' + localStorage.getItem('refresh'),
-                },
-                body: JSON.stringify({
-                    refreshToken: localStorage.getItem('refresh')
-                })
-            })
-            .then(function(response) {
+    //     if ((context.session !== true)) navigate('/login')
 
-                return response.json();
-            })
-            .then(function(data) {
+    // }
 
-                console.log(data);
-                return data;
-            });
+    // static saveSession(data, setSession) {
 
-        return data;
-    }
+    //     localStorage.setItem('id', data.user.id)
+    //     localStorage.setItem('email', data.user.email);
+    //     localStorage.setItem('token', data.tokens.refresh.token);
+    //     localStorage.setItem('firstName', data.user.firstName);
+    //     localStorage.setItem('lastName', data.user.lastName);
+
+
+    //     setSession(true)
+
+    // }
 
 
 
-    static connected = async(setSession) => {
+    // static connected = async(setSession) => {
 
-        if (localStorage.getItem('id') !== undefined && localStorage.getItem('token') !== undefined) {
+    //     if (localStorage.getItem('id') !== undefined && localStorage.getItem('token') !== undefined) {
 
-            const results = await this.session()
+    //         const results = await this.session()
 
-            if (!results) {
+    //         if (!results) {
 
-                localStorage.removeItem('id')
-                localStorage.removeItem('token')
-                localStorage.removeItem('firstName')
-                localStorage.removeItem('lastName')
-                localStorage.removeItem('email')
+    //             localStorage.removeItem('id')
+    //             localStorage.removeItem('token')
+    //             localStorage.removeItem('firstName')
+    //             localStorage.removeItem('lastName')
+    //             localStorage.removeItem('email')
 
-                setSession(false)
+    //             setSession(false)
 
-            } else {
+    //         } else {
 
-                setSession(true)
+    //             setSession(true)
 
-            }
+    //         }
 
-            return results.success
+    //         return results.success
 
-        } else {
+    //     } else {
 
-            return false
-        }
-    }
+    //         return false
+    //     }
+    // }
 
 
-    static getAllUserInfos = async(setUserAllInfos, user = false) => {
+    static getAllUserInfos = async(setAllUser) => {
 
-        if (!user) user = localStorage.getItem('id')
+        // if (!user) user = localStorage.getItem('id')
 
-        fetch("https://bf-gest.rylize.dev/users?search=admin&role=admin", {
+        fetch("https://bf-gest.rylize.dev/users", {
             method: "POST",
             headers: {
 
                 "Content-Type": "application/json",
-                Authorization: 'Bearer' + localStorage.getItem('access'),
+
+            },
+            body: JSON.stringify({
+
+                Authorization: 'Bearer' + localStorage.getItem('access')
+            })
+        }).then(function(response) {
+            return response.json()
+
+        }).then(function(data) {
+            console.log(data);
+            setAllUser(data)
+
+            // localStorage.setItem('token', data)
+
+            // // console.log(localStorage);
+            // if (data) {
+            //     setAllUser(data.user)
+            // }
+
+        })
+
+    }
+
+    static fetchInfo = async(setData) => {
+        return fetch("https://bf-gest.rylize.dev/users", {
+                headers: {
+                    "Content-Type": "application/json",
+
+                },
+                body: JSON.stringify({
+
+                    Authorization: 'Bearer' + localStorage.getItem('access')
+                })
+            })
+            .then((res) => res.json())
+            .then((d) => setData(d))
+
+
+    }
+
+    static home = () => {
+
+        let data = fetch("https://bf-gest.rylize.dev/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
 
             })
+
         }).then(function(response) {
             return response.json()
         }).then(function(data) {
-            localStorage.setItem('token', data)
-            console.log(localStorage);
-            if (data.success) {
-                setUserAllInfos(data.data)
-            }
+
+            return data
 
         })
+
+        return data
 
     }
 

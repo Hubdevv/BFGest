@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { Context } from '../class/Context'
 import Logout from '../class/Logout'
+import User from '../class/User'
 
 function Dashboard() {
   
   const context = useContext(Context)
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+  //  User.saveSession() 
+   }, []);
 
   return (
     <div className='col-10' >

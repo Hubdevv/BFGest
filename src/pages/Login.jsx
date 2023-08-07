@@ -3,49 +3,6 @@ import User from '../class/User'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../class/Context'
 
-const Connect = async (e, setError,navigate) => {
-
-  e.preventDefault();
-
-  let inputs = e.target
-
-  let pass= inputs.pass
-
-  let email = inputs.email
-
-  if( email.value !=='' && pass.value !==''){
-
-      console.log("Les champs sont remplis")
-
-      const results = await User.login(inputs);
-
-      console.log(results)
-
-      if(results){
-        console.log('logged in');
-        localStorage.setItem('id', results.user.id)   
-        localStorage.setItem('email', results.user.email);    
-        localStorage.setItem('token', results.tokens.refresh.token);    
-        localStorage.setItem('firstName', results.user.firstName);    
-        localStorage.setItem('lastName', results.user.lastName); 
-
-          setError('')
-
-          navigate('/dashboard')
-
-          // setSession(true)
-
-       }else{
-          setError(results.message)
-                       
-       }
-
-  }else{
-
-  setError( 'Veuillez saisir votre mot de passe')
-  }
-
-}
 
 function Login() {
 
@@ -54,6 +11,50 @@ function Login() {
 
   const [error, setError] = useState('')
 
+  const Connect = async (e, setError,navigate) => {
+
+    e.preventDefault();
+  
+    let inputs = e.target
+  
+    let pass= inputs.pass
+  
+    let email = inputs.email
+  
+    if( email.value !=='' && pass.value !==''){
+  
+        console.log("Les champs sont remplis")
+  
+        const results = await User.login(inputs);
+  
+        console.log(results)
+  
+        if(results){
+          console.log('logged in');
+          // localStorage.setItem('id', results.user.id)   
+          // localStorage.setItem('email', results.user.email);    
+          // localStorage.setItem('token', results.tokens.refresh.token);    
+          // localStorage.setItem('firstName', results.user.firstName);    
+          // localStorage.setItem('lastName', results.user.lastName); 
+  
+            setError('')
+  
+            navigate('/dashboard')
+  
+            context.setSession(true)
+  
+         }else{
+            setError(results.message)
+                         
+         }
+  
+    }else{
+  
+    setError( 'Veuillez saisir votre mot de passe')
+    }
+  
+  }
+  
   return (
     <div className='c center'>
       <div className='login cl2 '>

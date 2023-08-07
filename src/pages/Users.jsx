@@ -5,32 +5,58 @@ import Logout from '../class/Logout';
 import User from '../class/User';
 import Table from '../components/Table';
 
-const getUsers = async(setAllUser) =>{
 
-  const results = await User.getAllUserInfos();
-
-  console.log("where are the users !")
-
-  setAllUser(results)
-
-  console.log(results)
-}
 
 function Users() {
+  const fetchInfo = async() =>{
 
+    const results = await User.home();
+  
+    console.log("where are the users !")
+    setData(results)
+    // setAllUser(results)
+  
+    console.log("heeloooe",results)
+  }
+  const url = "https://bf-gest.rylize.dev/users";
   const context = useContext(Context)
 
-  const [alluser, setAllUser] = useState('');
-
+  // const [alluser, setAllUser] = useState([]);
+  const [data, setData] = useState([])
   const navigate = useNavigate();
 
-  useEffect(() => {
+
+
+      
+    useEffect(() => {
+     
+      fetchInfo(setData);
+
+    }, [])
+
+  // useEffect(() => {
     
-    User.session(context, navigate)
+  //   User.session(context, navigate)
+  //   async function getUsers(){
+  //     const response = await fetch(url,{method: "POST",
+      // headers: {
 
-    getUsers(setAllUser)
+      //     "Content-Type": "application/json",
+      //     Authorization: 'Bearer' + localStorage.getItem('access'),
+      // },      body: JSON.stringify({
+        
+  //   })
+  //   }) ;
+  //     const data = await response.json();
+  //   setAllUser(data)}
 
-  }, []);
+  //   getUsers()
+
+  //   // getUsers(setAllUser)
+    
+  //   console.log(alluser, "data users");
+
+  // }, []);
   
   return (
     <div className='col-10' >
@@ -97,16 +123,48 @@ function Users() {
               <th>ROLE</th>
             </tr>
 
+            {/* {
+              alluser == false
+              ?
+              <div className=''>Loading</div>
+              :
+              alluser
+
+              &&
+              alluser.map((element) => <Table key={element.id} data={element} />)
+            } 
        
-            {
+            { 
                 alluser
+
                 &&
               
-                alluser.map((element) => <Table key={element.id} user={element} />)
-            }
+                alluser.map((element) => <Table key={element.id} data={element} />)
+            } */}
           </table>
         
-
+      <h1 style={{ color: "green" }}>using JavaScript inbuilt FETCH API</h1>
+      <center> {data.lastName}   
+           {/* {
+        
+        data 
+        &&
+        data.map((dataObj, index) => {
+          return (
+            <div
+              style={{
+                width: "15em",
+                backgroundColor: "#35D841",
+                padding: 2,
+                borderRadius: 10,
+                marginBlock: 10,
+              }}
+            >
+              <p style={{ fontSize: 20, color: 'white' }}>{dataObj.lastName}</p>
+            </div>
+          );
+        })} */}
+      </center>
         </div>
       </div>
  
