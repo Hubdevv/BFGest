@@ -12,7 +12,9 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-  //  User.saveSession() 
+    
+   User.saveSession() 
+
    }, []);
 
   return (

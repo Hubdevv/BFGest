@@ -133,13 +133,13 @@ class User {
 
     static home = () => {
 
-        let data = fetch("https://bf-gest.rylize.dev/users", {
+        let data = fetch("https://bf-gest.rylize.dev/users?search=admin&role=admin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-
+                Authorization: 'Bearer' + localStorage.getItem('access'),
             })
 
         }).then(function(response) {
