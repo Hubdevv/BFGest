@@ -57,9 +57,9 @@ function Login() {
   
   return (
     <div className='c center'>
-      <div className='login cl2'>
+      <div className='login cl2 '>
         <h2>Connectez vous</h2>
-        <span>Connectez-vous à votre espace administrateur</span>
+        <p>Connectez-vous à votre espace administrateur</p>
 
         <form action="" method="POST" onSubmit={(e) => Connect(e,setError,navigate)}>
 
@@ -69,13 +69,11 @@ function Login() {
             <input type="email" name='email' id='email' placeholder='Email' required="true" />
 
             <label>Mot de passe</label>
-     
-           <input type="password" id='pass' placeholder='Mot de passe'/>
-      
+            <input type="password" id='pass' placeholder='Mot de passe'/>
            {(error !== '') && <p className="cl6">Veuillez saisir votre mot de passe</p>}  
 
 
-            <input type="submit" value={"SE CONNECTER"}  className="btn m" />
+            <input type="submit" value={"SE CONNECTER"}  className="btn" />
             
         </form>
 

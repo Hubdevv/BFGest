@@ -98,11 +98,11 @@ function Users() {
 
                 
             { 
-              alluser
+              // alluser
 
-              &&
+              
             
-              alluser.map((element) => <Table key={element.id} data={element} />)
+              // alluser.map((element) => <Table key={element.id} data={element} />)
             } 
 
           </table>
