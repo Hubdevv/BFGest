@@ -1,13 +1,10 @@
 import React, {useContext, useState} from 'react'
 import User from '../class/User'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../class/Context'
-
 
 function Login() {
 
   const navigate = useNavigate();
-  const context = useContext(Context)
 
   const [error, setError] = useState('')
 
@@ -41,7 +38,7 @@ function Login() {
   
             navigate('/dashboard')
   
-            context.setSession(true)
+          // setSession(true)
   
          }else{
             setError(results.message)

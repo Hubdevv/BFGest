@@ -1,86 +1,140 @@
-import React, {useContext, useState} from 'react'
-import User from '../class/User'
+import React, {useContext, useState , useRef, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../class/Context'
-
+import AuthContext from '../context/AuthProvider';
+import axios from '../api/axios'
+const LOGIN_URL = '/auth'
 
 function Login() {
 
+  const {setAuth} = useContext(AuthContext);
+
+  const emailRef = useRef();
+
+  const errRef = useRef();
+
   const navigate = useNavigate();
-  const context = useContext(Context)
+
+  const [email , setEmail] = useState('')
+
+  const [pwd, setPwd] = useState('')
 
   const [error, setError] = useState('')
 
-  const Connect = async (e, setError,navigate) => {
+  const [success ,setSuccess] = useState('')
 
-    e.preventDefault();
+  useEffect(() => {
+
+     emailRef.current.focus();
+
+  }, []);
+
+  useEffect(() => {
+
+   setError('');
+
+  }, [email, pwd]);
+
+
+  const handleSubmit = async (e) =>{
+
+    e.preventDefault()
+
+    try {
+      const response = await axios.post(LOGIN_URL, 
+        JSON.stringify({email, password: pwd}),
+        {
+          headers: {'Content-Type': 'application/json'},
+          withCredentials: true
+      })
+
+      console.log(JSON.stringify(response?.data));
+
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+
+      setAuth({email, pwd ,roles, accessToken});
+
+      setEmail('')
+
+      setPwd('')
   
-    let inputs = e.target
-  
-    let pass= inputs.pass
-  
-    let email = inputs.email
-  
-    if( email.value !=='' && pass.value !==''){
-  
-        console.log("Les champs sont remplis")
-  
-        const results = await User.login(inputs);
-  
-        console.log(results)
-  
-        if(results){
-          console.log('logged in');
-          localStorage.setItem('id', results.user.id)   
-          localStorage.setItem('email', results.user.email);    
-          localStorage.setItem('token', results.tokens.refresh.token);    
-          localStorage.setItem('firstName', results.user.firstName);    
-          localStorage.setItem('lastName', results.user.lastName); 
-  
-            setError('')
-  
-            navigate('/dashboard')
-  
-            context.setSession(true)
-  
-         }else{
-            setError(results.message)
-                         
-         }
-  
-    }else{
-  
-    setError( 'Veuillez saisir votre mot de passe')
+      setSuccess(true)
+
+      navigate('/dashbord')
+
+    } catch (error) {
+      if(!error?.response){
+        setError('No Server response');
+       }else if (error.response?.status === 400){
+        setError("Missing email or password");
+       }else if (error.response?.status === 401){
+        setError("Unauthorized")
+       } else {
+        setError('Login failed')
+       }
+
+       errRef.current.focus()
     }
-  
+
+
   }
-  
   return (
+    <>
+
+    {  success 
+
+    ?
+    <p className='cl2 center'>You are logged in GO to dashbord</p>
+
+    :
+    
     <div className='c center'>
-      <div className='login cl2'>
-        <h2>Connectez vous</h2>
-        <span>Connectez-vous à votre espace administrateur</span>
 
-        <form action="" method="POST" onSubmit={(e) => Connect(e,setError,navigate)}>
+        <div className='login cl2'>
 
-          {(error !== '') && <p className="err">{error}</p>}  
+          <h2>Connectez vous</h2>
 
-            <label>Email</label>
-            <input type="email" name='email' id='email' placeholder='Email' required="true" />
+          <span>Connectez-vous à votre espace administrateur</span>
 
-            <label>Mot de passe</label>
-     
-           <input type="password" id='pass' placeholder='Mot de passe'/>
-      
-           {(error !== '') && <p className="cl6">Veuillez saisir votre mot de passe</p>}  
+          <form action="" method="POST" onSubmit={handleSubmit}>
 
+            <p ref={errRef} className= {!error ? "cl2 mb20" : " err cl6 mb20"} aria-live="assertive">{error}</p>
 
-            <input type="submit" value={"SE CONNECTER"}  className="btn m" />
-            
-        </form>
+              <label>Email</label>
 
-      </div>
+              <input
+              type="email"
+              name='email'
+              id='email'
+              ref={emailRef}
+              placeholder='Email'
+              required
+              // autoComplete='off'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+                />
+
+              <label>Mot de passe</label>
+
+            <input 
+            type="password"
+            id='password'
+            name='password' 
+            placeholder='Mot de passe'
+            value={pwd}
+            required
+            onChange={(e) => setPwd(e.target.value)}
+            />
+
+             <input type="submit" value={"SE CONNECTER"}  className="btn m" />
+              
+          </form>
+
+        </div>
     </div>
+    }
+    </>
+   
   )
 }
 

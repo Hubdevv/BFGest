@@ -1,6 +1,5 @@
 import React , {useContext , useEffect, useState} from 'react'
 import { useNavigate, Link } from "react-router-dom";
-import { Context } from '../class/Context'
 import Logout from '../class/Logout';
 import User from '../class/User';
 import Table from '../components/Table';
@@ -9,9 +8,6 @@ import Table from '../components/Table';
 
 function Users() {
  
-  
-  const context = useContext(Context)
-
   const [alluser, setAllUser] = useState([]);
 
   const navigate = useNavigate();
@@ -48,7 +44,7 @@ function Users() {
                 <ul className='compte'>
                       <li><Link to={'/'} className='link'>Profile</Link></li>
                       <li><Link to={'/'} className='link'>Parametres</Link></li>
-                      <li><Link  onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li>
+                      {/* <li><Link  onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li> */}
 
                 </ul>
             </div>

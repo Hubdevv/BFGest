@@ -1,7 +1,6 @@
 
 import Login from './pages/Login';
 import { useEffect, useState } from 'react';
-import { Context } from './class/Context';
 import { BrowserRouter as Router, Routes, Route   } from 'react-router-dom'; 
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
@@ -17,7 +16,7 @@ function App() {
   
   return (
     <div className="App">
-    <Context.Provider value={{session: session, setSession: setSession }}>
+    
 
       <Router>
         <Routes>
@@ -28,7 +27,6 @@ function App() {
 
         </Routes>
       </Router>
-    </Context.Provider>
 
     </div>
   );

@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
-import { Context } from '../class/Context'
+
 import Logout from '../class/Logout'
 import User from '../class/User'
 
 function Dashboard() {
-  
-  const context = useContext(Context)
 
   const navigate = useNavigate();
 
@@ -35,7 +33,7 @@ function Dashboard() {
                 <ul className='compte'>
                       <li><Link to={'/'} className='link'>Profile</Link></li>
                       <li><Link to={'/'} className='link'>Parametres</Link></li>
-                      <li><Link onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li>
+                      {/* <li><Link onClick={() => Logout.logout(context, navigate)} className='link'>Se déconnecter</Link></li> */}
 
                 </ul>
             </div>
